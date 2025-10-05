@@ -1025,7 +1025,6 @@ def render_form_cliente():
                         <label for="nome" class="form-label">Nome Completo *</label>
                         <input type="text" class="form-control" id="nome" name="nome" 
                                placeholder="Ex: João Silva Santos" required>
-                        <div class="form-text-example">Exemplo: Maria Oliveira Souza</div>
                     </div>
                     
                     <div class="col-md-4 mb-3">
@@ -1073,7 +1072,6 @@ def render_form_cliente():
                     <label for="endereco" class="form-label">Endereço</label>
                     <textarea class="form-control" id="endereco" name="endereco" rows="3" 
                               placeholder="Ex: Rua das Flores, 123 - Centro - São Paulo/SP"></textarea>
-                    <div class="form-text-example">Exemplo: Av. Paulista, 1000 - Bela Vista - São Paulo/SP</div>
                 </div>
                 
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -1824,7 +1822,7 @@ def render_form_comodato():
                     <div class="col-md-6 mb-3">
                         <label for="sistema_operacional" class="form-label">Sistema Operacional</label>
                         <input type="text" class="form-control" id="sistema_operacional" name="sistema_operacional" 
-                               value="Windows 11 Pro" placeholder="Ex: Windows 11 Pro">
+                              placeholder="Ex: Windows 11 Pro">
                     </div>
                 </div>
 
@@ -2872,3 +2870,4 @@ init_database()
 if __name__ == '__main__':
     # ⚠️ APENAS para desenvolvimento
     app.run(host='0.0.0.0', port=5000, debug=True)
+
