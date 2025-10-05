@@ -2840,40 +2840,35 @@ def criar_admin():
         print("👤 Email: pietro.admin")
         print("🔑 Senha: Pietro&Yuri29")
 
-# Inicialização do sistema
-if __name__ == '__main__':
+# Inicialização do sistema - CORRIGIDA
+def init_database():
     with app.app_context():
         try:
-            # Criar todas as tabelas
-            db.create_all()
-            print("✅ Banco de dados inicializado!")
+            print("🔄 Iniciando criação do banco de dados...")
             
-            # Criar usuário admin
+            # ✅ FORÇAR criação das tabelas
+            db.create_all()
+            print("✅ Tabelas criadas com sucesso!")
+            
+            # ✅ Verificar se as tabelas foram criadas
+            from sqlalchemy import inspect
+            inspector = inspect(db.engine)
+            tables = inspector.get_table_names()
+            print(f"📋 Tabelas no banco: {tables}")
+            
+            # ✅ Só então criar admin
             criar_admin()
             
-            print("\n🚀 Sistema Avell - Gestão de Empréstimos e Comodatos")
-            print("📍 Acesse: http://localhost:5000")
-            print("🔐 Login admin: pietro.admin / Pietro&Yuri29")
-            print("\n📊 Funcionalidades disponíveis:")
-            print("   • Dashboard com estatísticas")
-            print("   • Gestão completa de clientes")
-            print("   • Gestão completa de notebooks")
-            print("   • Controle de empréstimos")
-            print("   • Gestão de comodatos")
-            print("   • Relatórios e gráficos")
-            print("   • Design Avell unificado")
-            print("   • Gerenciamento de usuários (apenas pietro.admin)")
-            print("   • Tema claro/escuro")
-            print("   • Validação de CPF/CNPJ em tempo real")
-            print("   • Validação de email com @ e domínio")
-            print("   • Formatação de telefone com DDI")
-            print("   • ✅ EDIÇÃO COMPLETA DE USUÁRIOS")
-            print("   • ✅ EXEMPLOS NOS CAMPOS DE NOME E ENDEREÇO")
-            print("   • ✅ EXEMPLOS EM TODOS OS CAMPOS DE COMODATO")
-            print("   • ✅ TÍTULOS EM VERMELHO NO FORMULÁRIO DE COMODATO")
+            print("🎉 Banco de dados inicializado com sucesso!")
             
         except Exception as e:
             print(f"❌ Erro durante inicialização: {e}")
-    
+            import traceback
+            traceback.print_exc()
+
+# Inicializar o banco quando o app iniciar
+init_database()
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    # ⚠️ APENAS para desenvolvimento
+    app.run(host='0.0.0.0', port=5000, debug=True)
