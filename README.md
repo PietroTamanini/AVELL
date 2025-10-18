@@ -36,7 +36,7 @@ Para rodar o sistema localmente, siga estes passos:
 
 ```bash
 # ⬇️ Clonar o repositório
-git clone [[URL_DO_SEU_REPOSITORIO]](https://github.com/PietroTamanini/AVELL.git)
+git clone (https://github.com/PietroTamanini/AVELL.git)
 cd AVELL
 
 # 🐍 Criar e ativar o ambiente virtual
