@@ -702,7 +702,7 @@ def render_base(content, active_page='dashboard'):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema Avell - Empréstimos</title>
-    <link rel="icon" type="image/png" href="/avell.png">
+    <link rel="icon" type="image/png" href="/static/avell.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     {CSS_GLOBAL}
@@ -2870,5 +2870,6 @@ init_database()
 if __name__ == '__main__':
     # ⚠️ APENAS para desenvolvimento
     app.run(host='0.0.0.0', port=5000, debug=True)
+
 
 
