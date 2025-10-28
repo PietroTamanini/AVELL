@@ -682,7 +682,7 @@ def render_base(content, active_page='dashboard'):
     ]
     
     # Adicionar link de usuários apenas para admin
-    if session.get('usuario_email') == 'pietro.admin':
+    if session.get('usuario_email') == 'admin':
         links.append({'url': '/usuarios', 'icon': 'fa-user-shield', 'text': 'Gerenciar Usuários', 'page': 'usuarios'})
     
     # Gerar HTML dos links
@@ -2235,7 +2235,7 @@ def render_usuarios(usuarios=None):
     
     usuarios_html = ''
     for usuario in usuarios:
-        if usuario.email == 'pietro.admin':
+        if usuario.email == 'admin':
             continue
             
         status_badge = '<span class="badge bg-success">Ativo</span>' if usuario.ativo else '<span class="badge bg-danger">Inativo</span>'
@@ -2694,8 +2694,8 @@ def usuarios():
     if 'usuario_id' not in session:
         return redirect(url_for('login'))
     
-    # Apenas pietro.admin pode acessar
-    if session.get('usuario_email') != 'pietro.admin':
+    # Apenas admin pode acessar
+    if session.get('usuario_email') != 'admin':
         flash('Acesso não autorizado!', 'danger')
         return redirect(url_for('dashboard'))
     
@@ -2707,8 +2707,8 @@ def criar_usuario():
     if 'usuario_id' not in session:
         return redirect(url_for('login'))
     
-    # Apenas pietro.admin pode criar usuários
-    if session.get('usuario_email') != 'pietro.admin':
+    # Apenas admin pode criar usuários
+    if session.get('usuario_email') != 'admin':
         flash('Acesso não autorizado!', 'danger')
         return redirect(url_for('dashboard'))
     
@@ -2741,7 +2741,7 @@ def criar_usuario():
 
 @app.route('/usuarios/editar', methods=['POST'])
 def editar_usuario():
-    if 'usuario_id' not in session or session.get('usuario_email') != 'pietro.admin':
+    if 'usuario_id' not in session or session.get('usuario_email') != 'admin':
         flash('Acesso não autorizado!', 'danger')
         return redirect(url_for('dashboard'))
     
@@ -2755,8 +2755,8 @@ def editar_usuario():
         
         usuario = Usuario.query.get_or_404(usuario_id)
         
-        # Não permitir editar o pietro.admin
-        if usuario.email == 'pietro.admin':
+        # Não permitir editar o admin
+        if usuario.email == 'admin':
             flash('Não é possível editar o administrador principal!', 'danger')
             return redirect(url_for('usuarios'))
         
@@ -2785,15 +2785,15 @@ def editar_usuario():
 
 @app.route('/usuarios/desativar/<int:id>')
 def desativar_usuario(id):
-    if 'usuario_id' not in session or session.get('usuario_email') != 'pietro.admin':
+    if 'usuario_id' not in session or session.get('usuario_email') != 'admin':
         flash('Acesso não autorizado!', 'danger')
         return redirect(url_for('dashboard'))
     
     try:
         usuario = Usuario.query.get_or_404(id)
         
-        # Não permitir desativar o pietro.admin
-        if usuario.email == 'pietro.admin':
+        # Não permitir desativar o admin
+        if usuario.email == 'admin':
             flash('Não é possível desativar o administrador principal!', 'danger')
             return redirect(url_for('usuarios'))
         
@@ -2808,7 +2808,7 @@ def desativar_usuario(id):
 
 @app.route('/usuarios/ativar/<int:id>')
 def ativar_usuario(id):
-    if 'usuario_id' not in session or session.get('usuario_email') != 'pietro.admin':
+    if 'usuario_id' not in session or session.get('usuario_email') != 'admin':
         flash('Acesso não autorizado!', 'danger')
         return redirect(url_for('dashboard'))
     
@@ -2825,18 +2825,18 @@ def ativar_usuario(id):
 
 # Função para criar usuário admin
 def criar_admin():
-    if not Usuario.query.filter_by(email='pietro.admin').first():
+    if not Usuario.query.filter_by(email='admin').first():
         admin = Usuario(
-            nome='Pietro Admin',
-            email='pietro.admin',
+            nome='Admin',
+            email='admin',
             permissao='admin'
         )
-        admin.set_senha('Pietro&Yuri29')
+        admin.set_senha('admin')
         db.session.add(admin)
         db.session.commit()
         print("✅ Administrador principal criado!")
-        print("👤 Email: pietro.admin")
-        print("🔑 Senha: Pietro&Yuri29")
+        print("👤 Email: admin")
+        print("🔑 Senha: admin")
 
 # Inicialização do sistema - CORRIGIDA
 def init_database():
