@@ -51,4 +51,4 @@ python app.py
 
 #🔑 Credenciais Padrão (Administrador)
 | Usuário (E-mail) | Senha |
-| pietro.admin  | Pietro&Yuri29 |
+| admin  | admin |
